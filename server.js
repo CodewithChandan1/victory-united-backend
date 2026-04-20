@@ -32,8 +32,11 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 let dbConnected = false;
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/victory-united', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+  retryWrites: true,
+  w: 'majority'
 })
 .then(() => {
   dbConnected = true;

@@ -86,6 +86,11 @@ app.use('/api/', (req, res, next) => {
   next();
 });
 
+// Base API route
+app.get('/api', (req, res) => {
+  res.json({ message: 'Welcome to Victory United API' });
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/players', require('./routes/players'));

@@ -41,13 +41,13 @@ mongoose.connect(process.env.ATLAS_URI, {
   .then(() => {
     dbConnected = true;
     console.log('✅ Connected to MongoDB');
-    console.log(`📡 Database: ${process.env.MONGODB_URI ? 'Remote Cluster' : 'Local Instance'}`);
+    console.log(`📡 Database: ${process.env.ATLAS_URI ? 'Remote Cluster' : 'Local Instance'}`);
   })
   .catch(err => {
     dbConnected = false;
     console.error('❌ MongoDB connection error:', err.message);
     console.error('🔍 Troubleshooting:');
-    console.error('   1. Check if MONGODB_URI is correctly set in .env');
+    console.error('   1. Check if ATLAS_URI is correctly set in .env');
     console.error('   2. Verify if your IP is whitelisted in MongoDB Atlas');
     console.error('   3. Ensure you have a stable internet connection');
   });

@@ -29,12 +29,20 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // MongoDB connection
+let dbConnected = false;
+
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/victory-united', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log('✅ Connected to MongoDB'))
-.catch(err => console.error('❌ MongoDB connection error:', err));
+.then(() => {
+  dbConnected = true;
+  console.log('✅ Connected to MongoDB');
+})
+.catch(err => {
+  console.error('❌ MongoDB connection error:', err);
+  console.error('URI being used:', process.env.MONGODB_URI ? 'Using MONGODB_URI from .env' : 'Using default localhost');
+});
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));

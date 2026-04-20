@@ -42,7 +42,8 @@ router.get('/', async (req, res) => {
     console.error('Get players error:', error);
     res.status(500).json({ 
       message: 'Server error while fetching players',
-      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      error: error.message,
+      errorName: error.name
     });
   }
 });
